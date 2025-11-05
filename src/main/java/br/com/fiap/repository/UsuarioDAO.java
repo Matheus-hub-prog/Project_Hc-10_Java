@@ -14,6 +14,11 @@ public class UsuarioDAO {
 
     // Listar todos os usuários
     public List<Usuario> listarTodos() {
+        Usuario u = new Usuario();
+        u.setId(1);
+        u.setNome("Matheus");
+        u.setLogin("matheus");
+        usuarios.add(u);
         return new ArrayList<>(usuarios); // retorna cópia para segurança
     }
 
