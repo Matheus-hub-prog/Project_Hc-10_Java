@@ -4,12 +4,13 @@ import java.time.LocalDate;
 
 public class Consulta {
     private int consultaId;
-    private String tipo; // "O" (online) ou "P" (presencial)
+    private String tipo;
     private String especialidade;
     private LocalDate consultaData;
     private String consultaHora;
-    private Usuario usuario;       // FK → usuario_id
-    private Funcionario funcionario; // FK → funcionario_id
+    private Usuario usuario;
+    private Funcionario funcionario;
+    private String status; // ✅ ADICIONADO
 
     // Construtor
     public Consulta(int consultaId, String tipo, String especialidade,
@@ -22,6 +23,7 @@ public class Consulta {
         this.consultaHora = consultaHora;
         this.usuario = usuario;
         this.funcionario = funcionario;
+        this.status = "AGENDADA"; // ✅ status padrão
     }
 
     // Getters e Setters
@@ -46,6 +48,9 @@ public class Consulta {
     public Funcionario getFuncionario() { return funcionario; }
     public void setFuncionario(Funcionario funcionario) { this.funcionario = funcionario; }
 
+    public String getStatus() { return status; }         // ✅ ADICIONADO
+    public void setStatus(String status) { this.status = status; } // ✅ ADICIONADO
+
     @Override
     public String toString() {
         return "Consulta{" +
@@ -56,6 +61,7 @@ public class Consulta {
                 ", consultaHora='" + consultaHora + '\'' +
                 ", usuario=" + (usuario != null ? usuario.getNome() : "null") +
                 ", funcionario=" + (funcionario != null ? funcionario.getNome() : "null") +
+                ", status='" + status + '\'' +      // ✅ ADICIONADO
                 '}';
     }
 }

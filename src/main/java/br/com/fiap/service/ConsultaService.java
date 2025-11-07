@@ -2,45 +2,46 @@ package br.com.fiap.service;
 
 import br.com.fiap.model.Consulta;
 import br.com.fiap.repository.ConsultaDAO;
-import br.com.fiap.repository.UsuarioDAO;
+import jakarta.enterprise.context.ApplicationScoped;
+import jakarta.inject.Inject;
 
-import java.util.ArrayList;
 import java.util.List;
 
+@ApplicationScoped
 public class ConsultaService {
-    private final ConsultaDAO consultaDAO;
-    private final UsuarioDAO usuarioDAO;
 
-    private final List<Consulta> consultas = new ArrayList<>();
+    @Inject
+    ConsultaDAO consultaDAO;   // ✅ injetado, Singleton
+
     private int faltas = 0;
 
-    public ConsultaService() {
-        this.consultaDAO = new ConsultaDAO();
-        this.usuarioDAO = new UsuarioDAO();
-    }
-
+    // ✅ Cadastrar consulta
     public void cadastrarConsulta(Consulta consulta) {
-        consultas.add(consulta);
         consultaDAO.cadastrar(consulta);
     }
 
+    // ✅ Listar consultas
     public List<Consulta> listarConsultas() {
-        return consultas;
+        return consultaDAO.listarTodos();
     }
 
-    public void registrarFalta(int consultaId) {
-        for (Consulta c : consultas) {
-            if (c.getConsultaId() == consultaId) {
-                faltas++;
-                System.out.println("Falta registrada para consulta ID: " + consultaId);
-                return;
-            }
+    // ✅ Registrar falta (agora retorna boolean)
+    public boolean registrarFalta(int consultaId) {
+        boolean registrada = consultaDAO.registrarFalta(consultaId);
+        if (registrada) {
+            faltas++;
+            return true;
         }
-        System.out.println("Consulta não encontrada para ID: " + consultaId);
+        return false;
     }
 
+    // ✅ Calcular taxa
     public double calcularTaxaAbsenteismoPercentual() {
-        if (consultas.isEmpty()) return 0.0;
+        List<Consulta> consultas = consultaDAO.listarTodos();
+
+        if (consultas.isEmpty())
+            return 0.0;
+
         return ((double) faltas / consultas.size()) * 100.0;
     }
 }
