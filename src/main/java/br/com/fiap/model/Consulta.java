@@ -10,7 +10,7 @@ public class Consulta {
     private String consultaHora;
     private Usuario usuario;
     private Funcionario funcionario;
-    private String status; // ✅ ADICIONADO
+    private String status;
 
     // Construtor
     public Consulta(int consultaId, String tipo, String especialidade,
@@ -23,7 +23,7 @@ public class Consulta {
         this.consultaHora = consultaHora;
         this.usuario = usuario;
         this.funcionario = funcionario;
-        this.status = "AGENDADA"; // ✅ status padrão
+        this.status = "AGENDADA"; // status padrão
     }
 
     // Getters e Setters
@@ -48,8 +48,8 @@ public class Consulta {
     public Funcionario getFuncionario() { return funcionario; }
     public void setFuncionario(Funcionario funcionario) { this.funcionario = funcionario; }
 
-    public String getStatus() { return status; }         // ✅ ADICIONADO
-    public void setStatus(String status) { this.status = status; } // ✅ ADICIONADO
+    public String getStatus() { return status; }
+    public void setStatus(String status) { this.status = status; }
 
     @Override
     public String toString() {
@@ -61,7 +61,7 @@ public class Consulta {
                 ", consultaHora='" + consultaHora + '\'' +
                 ", usuario=" + (usuario != null ? usuario.getNome() : "null") +
                 ", funcionario=" + (funcionario != null ? funcionario.getNome() : "null") +
-                ", status='" + status + '\'' +      // ✅ ADICIONADO
+                ", status='" + status + '\'' +
                 '}';
     }
 }

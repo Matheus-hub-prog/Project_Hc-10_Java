@@ -15,15 +15,15 @@ import java.util.List;
 public class UsuarioController {
 
     @Inject
-    UsuarioDAO usuarioDAO;   // ✅ Agora você usa a mesma instância sempre
+    UsuarioDAO usuarioDAO;
 
-    // 1️⃣ Listar todos os usuários
+    // Listar todos os usuários
     @GET
     public List<Usuario> listarUsuarios() {
         return usuarioDAO.listarTodos();
     }
 
-    // 2️⃣ Cadastrar novo usuário
+    // Cadastrar novo usuário
     @POST
     public Response cadastrarUsuario(Usuario usuario) {
         usuarioDAO.cadastrar(usuario);
@@ -32,7 +32,7 @@ public class UsuarioController {
                 .build();
     }
 
-    // 3️⃣ Buscar usuário por ID
+    // Buscar usuário por ID
     @GET
     @Path("/{id}")
     public Response buscarPorId(@PathParam("id") int id) {
@@ -47,7 +47,7 @@ public class UsuarioController {
         return Response.ok(usuario).build();
     }
 
-    // 4️⃣ Atualizar usuário
+    // Atualizar usuário
     @PUT
     @Path("/{id}")
     public Response atualizarUsuario(@PathParam("id") int id, Usuario usuarioAtualizado) {
@@ -63,7 +63,7 @@ public class UsuarioController {
                 .build();
     }
 
-    // 5️⃣ Deletar usuário
+    // Deletar usuário
     @DELETE
     @Path("/{id}")
     public Response deletarUsuario(@PathParam("id") int id) {

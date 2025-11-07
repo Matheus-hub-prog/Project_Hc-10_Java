@@ -11,21 +11,21 @@ import java.util.List;
 public class ConsultaService {
 
     @Inject
-    ConsultaDAO consultaDAO;   // ✅ injetado, Singleton
+    ConsultaDAO consultaDAO;   // injetado, Singleton
 
     private int faltas = 0;
 
-    // ✅ Cadastrar consulta
+    // Cadastrar consulta
     public void cadastrarConsulta(Consulta consulta) {
         consultaDAO.cadastrar(consulta);
     }
 
-    // ✅ Listar consultas
+    // Listar consultas
     public List<Consulta> listarConsultas() {
         return consultaDAO.listarTodos();
     }
 
-    // ✅ Registrar falta (agora retorna boolean)
+    // Registrar falta (agora retorna boolean)
     public boolean registrarFalta(int consultaId) {
         boolean registrada = consultaDAO.registrarFalta(consultaId);
         if (registrada) {
@@ -35,7 +35,7 @@ public class ConsultaService {
         return false;
     }
 
-    // ✅ Calcular taxa
+    // Calcular taxa
     public double calcularTaxaAbsenteismoPercentual() {
         List<Consulta> consultas = consultaDAO.listarTodos();
 

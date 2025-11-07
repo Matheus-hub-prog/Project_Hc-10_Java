@@ -6,10 +6,10 @@ import jakarta.inject.Singleton;
 import java.util.ArrayList;
 import java.util.List;
 
-@Singleton   // ✅ Garante 1 instância global no Quarkus
+@Singleton   // Garante 1 instância global no Quarkus
 public class ConsultaDAO {
 
-    // ✅ Lista compartilhada entre todos os endpoints
+    // Lista compartilhada entre todos os endpoints
     private static final List<Consulta> consultas = new ArrayList<>();
 
     // Cadastrar nova consulta
