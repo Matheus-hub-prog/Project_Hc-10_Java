@@ -1,42 +1,52 @@
 package br.com.fiap.repository;
 
 import br.com.fiap.model.Usuario;
+import jakarta.enterprise.context.ApplicationScoped;
+
 import java.util.ArrayList;
 import java.util.List;
 
+@ApplicationScoped
 public class UsuarioDAO {
+
     private List<Usuario> usuarios = new ArrayList<>();
 
     // Cadastrar novo usuário
-    public void cadastrar(Usuario u) {
-        usuarios.add(u);
+    public void cadastrar(Usuario usuario) {
+        usuarios.add(usuario);
     }
 
     // Listar todos os usuários
     public List<Usuario> listarTodos() {
-        Usuario u = new Usuario();
-        u.setId(1);
-        u.setNome("Matheus");
-        u.setLogin("matheus");
-        usuarios.add(u);
-        return new ArrayList<>(usuarios); // retorna cópia para segurança
+        return new ArrayList<>(usuarios); // retorna cópia
     }
 
     // Buscar usuário por ID
     public Usuario buscarPorId(int id) {
-        for (Usuario u : usuarios) {
-            if (u.getId() == id) {
-                return u;
-            }
-        }
-        return null;
+        return usuarios.stream()
+                .filter(u -> u.getId() == id)
+                .findFirst()
+                .orElse(null);
+    }
+
+    // Atualizar usuário
+    public boolean atualizar(int id, Usuario usuarioAtualizado) {
+        Usuario existente = buscarPorId(id);
+
+        if (existente == null) return false;
+
+        existente.setNome(usuarioAtualizado.getNome());
+        existente.setLogin(usuarioAtualizado.getLogin());
+        existente.setSenha(usuarioAtualizado.getSenha());
+
+        return true;
     }
 
     // Remover usuário por ID
     public boolean remover(int id) {
-        Usuario usuario = buscarPorId(id);
-        if (usuario != null) {
-            usuarios.remove(usuario);
+        Usuario usuário = buscarPorId(id);
+        if (usuário != null) {
+            usuarios.remove(usuário);
             return true;
         }
         return false;
